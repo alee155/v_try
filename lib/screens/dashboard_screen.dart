@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
+import 'package:vtry/controllers/profile_controller.dart';
 import 'package:vtry/models/category_model.dart' as category_model;
 import 'package:vtry/models/product_model.dart';
 import 'package:vtry/screens/product_details_screen.dart';
@@ -52,6 +54,7 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   final TextEditingController searchController = TextEditingController();
+  ProfileController? _profileController;
   List<bool> isFavorite = List.generate(10, (_) => false);
   int selectedIndex = 0;
 
@@ -60,6 +63,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
     super.initState();
     // Set selectedIndex from props
     selectedIndex = widget.selectedCategoryIndex;
+
+    // Try to find ProfileController safely
+    try {
+      _profileController = Get.find<ProfileController>();
+    } catch (e) {
+      if (kDebugMode) {
+        print('ProfileController not found in GetX container: $e');
+      }
+      // We'll handle the null case in the UI
+    }
   }
 
   @override
@@ -217,40 +230,99 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          Text(
-                            "user name",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 19.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          // Display user name from ProfileController if available
+                          _profileController != null
+                              ? Obx(() {
+                                  final userData =
+                                      _profileController?.getUserInfo() ?? {};
+                                  final userName = userData['name'] ?? 'User';
+                                  return Text(
+                                    userName,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 19.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  );
+                                })
+                              : Text(
+                                  'User',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 19.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                         ],
                       ),
-                      Container(
-                        width: 56,
-                        height: 56,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Colors.white.withOpacity(0.4),
-                            width: 2,
-                          ),
-                          image: const DecorationImage(
-                            image: NetworkImage(
-                              'https://randomuser.me/api/portraits/women/44.jpg',
+                      _profileController != null
+                          ? Obx(() {
+                              final userData =
+                                  _profileController?.getUserInfo() ?? {};
+                              final userName = userData['name'] ?? 'User';
+                              final firstLetter = userName.isNotEmpty
+                                  ? userName[0].toUpperCase()
+                                  : 'U';
+
+                              return Container(
+                                width: 56,
+                                height: 56,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: Colors.white.withOpacity(0.4),
+                                    width: 2,
+                                  ),
+                                  color: AppColors.primaryBlue.withOpacity(0.8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.2),
+                                      blurRadius: 8,
+                                      spreadRadius: 1,
+                                    ),
+                                  ],
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    firstLetter,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 24.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            })
+                          : Container(
+                              width: 56,
+                              height: 56,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: Colors.white.withOpacity(0.4),
+                                  width: 2,
+                                ),
+                                color: AppColors.primaryBlue.withOpacity(0.8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    blurRadius: 8,
+                                    spreadRadius: 1,
+                                  ),
+                                ],
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'U',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 24.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
                             ),
-                            fit: BoxFit.cover,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
-                              blurRadius: 8,
-                              spreadRadius: 1,
-                            ),
-                          ],
-                        ),
-                      ),
                     ],
                   ),
                   SizedBox(height: 20.h),

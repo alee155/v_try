@@ -208,6 +208,9 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       print('================================\n');
     }
 
+    // Load profile from storage first (if available)
+    await _profileController.loadUserProfileFromStorage();
+
     // Fetch user profile if token exists
     if (_authToken != null && _authToken!.isNotEmpty) {
       await _profileController.fetchUserProfile();

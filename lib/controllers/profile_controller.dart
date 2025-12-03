@@ -62,6 +62,9 @@ class ProfileController extends GetxController {
         final data = json.decode(response.body);
         userData.value = data;
 
+        // Save user data to session service for persistence
+        await _sessionService.saveUserProfile(data);
+
         // Print user data in readable format
         if (kDebugMode) {
           print('\n============= USER PROFILE DATA ==============');
@@ -95,5 +98,30 @@ class ProfileController extends GetxController {
   // Get user information
   Map<String, dynamic> getUserInfo() {
     return userData.value;
+  }
+
+  // Load user profile from local storage
+  Future<void> loadUserProfileFromStorage() async {
+    try {
+      final storedProfile = await _sessionService.getUserProfile();
+
+      if (storedProfile != null && storedProfile.isNotEmpty) {
+        userData.value = storedProfile;
+
+        if (kDebugMode) {
+          print(
+            '\n============= LOADED USER PROFILE FROM STORAGE ==============',
+          );
+          userData.value.forEach((key, value) {
+            print('$key: $value');
+          });
+          print('========================================================\n');
+        }
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error loading profile from storage: $e');
+      }
+    }
   }
 }

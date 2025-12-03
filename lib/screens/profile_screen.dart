@@ -18,7 +18,25 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final LoginController _loginController = Get.find<LoginController>();
-  final ProfileController _profileController = Get.find<ProfileController>();
+  ProfileController? _profileController;
+
+  @override
+  void initState() {
+    super.initState();
+    // Try to find ProfileController safely
+    try {
+      _profileController = Get.find<ProfileController>();
+      // Load user profile data if not already loaded
+      if (_profileController != null &&
+          (_profileController!.getUserInfo().isEmpty)) {
+        _profileController!.loadUserProfileFromStorage();
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('ProfileController not found in GetX container: $e');
+      }
+    }
+  }
 
   // Helper method to build profile info items
   Widget _buildProfileItem(String label, String value) {
@@ -155,19 +173,91 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     25.h.verticalSpace,
-                    Text(
-                      "Muhammad Ali",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 19.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    // User name from ProfileController
+                    _profileController != null
+                        ? Obx(() {
+                            final userData =
+                                _profileController?.getUserInfo() ?? {};
+                            final userName = userData['name'] ?? 'User';
+                            return Text(
+                              userName,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 19.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            );
+                          })
+                        : Text(
+                            "User",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 19.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                    // User email from ProfileController
+                    _profileController != null
+                        ? Obx(() {
+                            final userData =
+                                _profileController?.getUserInfo() ?? {};
+                            final userEmail = userData['email'] ?? 'No email';
+                            return Text(
+                              userEmail,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 14.sp,
+                              ),
+                            );
+                          })
+                        : Text(
+                            "No email available",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14.sp,
+                            ),
+                          ),
+                    SizedBox(height: 10.h),
+                    // User info section
+                    // _profileController != null
+                    //     ? Obx(() {
+                    //         final userData =
+                    //             _profileController?.getUserInfo() ?? {};
+                    //         return Column(
+                    //           children: [
+                    //             if (userData['id'] != null)
+                    //               _buildProfileItem(
+                    //                 'User ID',
+                    //                 userData['id'].toString(),
+                    //               ),
+                    //             if (userData['userName'] != null)
+                    //               _buildProfileItem(
+                    //                 'Username',
+                    //                 userData['userName'].toString(),
+                    //               ),
+                    //             if (userData['phone'] != null)
+                    //               _buildProfileItem(
+                    //                 'Phone',
+                    //                 userData['phone'].toString(),
+                    //               ),
+                    //           ],
+                    //         );
+                    //       })
+                    //     : const SizedBox(),
+                    // SizedBox(height: 10.h),
+                    CustomButton(
+                      text: "Logout",
+                      onPressed: () {
+                        _logout();
+                      },
+                      backgroundColor: AppColors.primaryBlue,
+                      textColor: Colors.white,
+                      textSize: 15.sp,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Roboto',
+                      borderRadius: 30.r,
+                      height: 55.h,
                     ),
-                    Text(
-                      "alee155@gmail.com",
-                      style: TextStyle(color: Colors.black, fontSize: 14.sp),
-                    ),
-
                     Expanded(
                       child: GridView.count(
                         crossAxisCount: 2,
@@ -191,30 +281,73 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Positioned(
             top: 130.h,
             left: 10.w,
-            child: Container(
-              width: 70.w,
-              height: 70.w,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: Colors.white.withOpacity(0.4),
-                  width: 2,
-                ),
-                image: const DecorationImage(
-                  image: NetworkImage(
-                    'https://randomuser.me/api/portraits/women/44.jpg',
+            child: _profileController != null
+                ? Obx(() {
+                    final userData = _profileController?.getUserInfo() ?? {};
+                    final userName = userData['name'] ?? 'User';
+                    final firstLetter = userName.isNotEmpty
+                        ? userName[0].toUpperCase()
+                        : 'U';
+
+                    return Container(
+                      width: 70.w,
+                      height: 70.w,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.4),
+                          width: 2,
+                        ),
+                        color: AppColors.primaryBlue.withOpacity(0.8),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.2),
+                            blurRadius: 8,
+                            spreadRadius: 1,
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Text(
+                          firstLetter,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 32.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    );
+                  })
+                : Container(
+                    width: 70.w,
+                    height: 70.w,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Colors.white.withOpacity(0.4),
+                        width: 2,
+                      ),
+                      color: AppColors.primaryBlue.withOpacity(0.8),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          blurRadius: 8,
+                          spreadRadius: 1,
+                        ),
+                      ],
+                    ),
+                    child: Center(
+                      child: Text(
+                        'U',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 32.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ),
-                  fit: BoxFit.cover,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    blurRadius: 8,
-                    spreadRadius: 1,
-                  ),
-                ],
-              ),
-            ),
           ),
         ],
       ),

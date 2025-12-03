@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SessionService {
@@ -6,6 +7,7 @@ class SessionService {
   static const String _userIdKey = 'user_id';
   static const String _emailKey = 'user_email';
   static const String _rememberMeKey = 'remember_me';
+  static const String _userProfileKey = 'user_profile';
 
   // Save user session data
   Future<bool> saveUserSession({
@@ -16,7 +18,7 @@ class SessionService {
   }) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      
+
       // Only save if remember me is enabled
       if (rememberMe) {
         await prefs.setString(_tokenKey, token);
@@ -27,7 +29,7 @@ class SessionService {
         // Clear any existing data if remember me is disabled
         await clearSession();
       }
-      
+
       return true;
     } catch (e) {
       print('Error saving user session: $e');
@@ -41,7 +43,7 @@ class SessionService {
       final prefs = await SharedPreferences.getInstance();
       final token = prefs.getString(_tokenKey);
       final rememberMe = prefs.getBool(_rememberMeKey);
-      
+
       // User is logged in if token exists and remember me is enabled
       return token != null && token.isNotEmpty && rememberMe == true;
     } catch (e) {
@@ -83,6 +85,45 @@ class SessionService {
     }
   }
 
+  // Save user profile data
+  Future<bool> saveUserProfile(Map<String, dynamic> userData) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(_userProfileKey, jsonEncode(userData));
+      return true;
+    } catch (e) {
+      print('Error saving user profile: $e');
+      return false;
+    }
+  }
+
+  // Get saved user profile data
+  Future<Map<String, dynamic>?> getUserProfile() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final userProfileJson = prefs.getString(_userProfileKey);
+
+      if (userProfileJson != null && userProfileJson.isNotEmpty) {
+        return jsonDecode(userProfileJson) as Map<String, dynamic>;
+      }
+      return null;
+    } catch (e) {
+      print('Error getting user profile: $e');
+      return null;
+    }
+  }
+
+  // Get user's name
+  Future<String?> getUserName() async {
+    try {
+      final userData = await getUserProfile();
+      return userData?['name'];
+    } catch (e) {
+      print('Error getting user name: $e');
+      return null;
+    }
+  }
+
   // Clear user session (logout)
   Future<bool> clearSession() async {
     try {
@@ -91,6 +132,7 @@ class SessionService {
       await prefs.remove(_userIdKey);
       await prefs.remove(_emailKey);
       await prefs.remove(_rememberMeKey);
+      await prefs.remove(_userProfileKey);
       return true;
     } catch (e) {
       print('Error clearing session: $e');
