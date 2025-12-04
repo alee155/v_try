@@ -20,9 +20,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.darkWhite,
       appBar: AppBar(
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.darkWhite,
         elevation: 0,
         centerTitle: true,
         title: Text(
@@ -39,7 +39,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onTap: () => Get.back(),
             child: Container(
               decoration: BoxDecoration(
-                color: AppColors.primaryBlue,
+                color: AppColors.darkPrimary,
                 borderRadius: BorderRadius.circular(10.r),
               ),
               child: const Icon(Icons.arrow_back, color: Colors.white),
@@ -77,12 +77,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 secondary: Container(
                   padding: EdgeInsets.all(8.w),
                   decoration: BoxDecoration(
-                    color: AppColors.primaryBlue.withOpacity(0.1),
+                    color: AppColors.darkPrimary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Icon(
                     Icons.notifications,
-                    color: AppColors.primaryBlue,
+                    color: AppColors.darkPrimary,
                   ),
                 ),
                 value: isNotificationOn,
@@ -108,10 +108,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 secondary: Container(
                   padding: EdgeInsets.all(8.w),
                   decoration: BoxDecoration(
-                    color: AppColors.primaryBlue.withOpacity(0.1),
+                    color: AppColors.darkPrimary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12.r),
                   ),
-                  child: Icon(Icons.dark_mode, color: AppColors.primaryBlue),
+                  child: Icon(Icons.dark_mode, color: AppColors.darkPrimary),
                 ),
                 value: isDarkTheme,
                 onChanged: (value) {
@@ -167,14 +167,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
       leading: Container(
         padding: EdgeInsets.all(8.w),
         decoration: BoxDecoration(
-          color: AppColors.primaryBlue.withOpacity(0.1),
+          color: AppColors.darkPrimary.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12.r),
         ),
         child: SvgPicture.asset(
           iconPath,
           width: 20.w,
           height: 20.h,
-          color: AppColors.primaryBlue,
+          color: AppColors.darkPrimary,
         ),
       ),
       title: Text(

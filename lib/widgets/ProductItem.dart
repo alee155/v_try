@@ -54,7 +54,7 @@ class ProductItem extends StatelessWidget {
                   height: 32.h,
                   width: 32.w,
                   decoration: BoxDecoration(
-                    color: AppColors.primaryBlue,
+                    color: AppColors.darkPrimary,
                     shape: BoxShape.circle,
                   ),
                   child: Icon(

@@ -25,7 +25,7 @@ class CustomTextField extends StatelessWidget {
       obscureText: isPassword && !isPasswordVisible,
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: TextStyle(color: AppColors.grey),
+        hintStyle: TextStyle(color: Colors.grey),
         filled: true,
         fillColor: Colors.white,
         border: OutlineInputBorder(
@@ -38,13 +38,13 @@ class CustomTextField extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.r),
-          borderSide: BorderSide(color: AppColors.black),
+          borderSide: BorderSide(color: AppColors.darkBlack),
         ),
         suffixIcon: isPassword
             ? IconButton(
                 icon: Icon(
                   isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                  color: AppColors.grey,
+                  color: Colors.grey,
                 ),
                 onPressed: togglePassword,
               )

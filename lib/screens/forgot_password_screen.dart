@@ -9,16 +9,18 @@ import 'package:vtry/widgets/custom_button.dart';
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({super.key});
 
-  final ForgotPasswordController controller = Get.put(ForgotPasswordController());
+  final ForgotPasswordController controller = Get.put(
+    ForgotPasswordController(),
+  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.darkWhite,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: IconThemeData(color: AppColors.primaryBlue),
+        iconTheme: IconThemeData(color: AppColors.darkPrimary),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
@@ -41,7 +43,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               child: Text(
                 "Forgot Password",
                 style: TextStyle(
-                  color: AppColors.black,
+                  color: AppColors.darkBlack,
                   fontSize: 22.sp,
                   fontWeight: FontWeight.w700,
                 ),
@@ -52,7 +54,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             // 📄 Description
             Text(
               "Enter your email address below to reset your password.",
-              style: TextStyle(color: AppColors.grey, fontSize: 14.sp),
+              style: TextStyle(color: Colors.grey, fontSize: 14.sp),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 30.h),
@@ -61,7 +63,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             Text(
               "Email Address",
               style: TextStyle(
-                color: AppColors.black,
+                color: AppColors.darkBlack,
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w500,
               ),
@@ -74,13 +76,13 @@ class ForgotPasswordScreen extends StatelessWidget {
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 hintText: "Enter your email",
-                hintStyle: TextStyle(color: AppColors.grey),
+                hintStyle: TextStyle(color: Colors.grey),
                 filled: true,
-                fillColor: AppColors.white,
+                fillColor: AppColors.darkWhite,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.r),
                   borderSide: BorderSide(
-                    color: AppColors.primaryBlue,
+                    color: AppColors.darkPrimary,
                     width: 1,
                   ),
                 ),
@@ -90,36 +92,45 @@ class ForgotPasswordScreen extends StatelessWidget {
             SizedBox(height: 40.h),
 
             // 🚀 Submit Button
-            Obx(() => controller.isLoading.value
-                ? Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.primaryBlue,
+            Obx(
+              () => controller.isLoading.value
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.darkPrimary,
+                      ),
+                    )
+                  : CustomButton(
+                      text: "Submit",
+                      onPressed: () {
+                        // Print payload data when button is tapped
+                        if (kDebugMode) {
+                          print(
+                            '\n============= FORGOT PASSWORD PAYLOAD ==============',
+                          );
+                          print(
+                            'Email: ${controller.emailController.text.trim()}',
+                          );
+                          print('Payload: {');
+                          print(
+                            '  "email": "${controller.emailController.text.trim()}"',
+                          );
+                          print('}');
+                          print(
+                            '================================================\n',
+                          );
+                        }
+
+                        // Call forgot password method
+                        controller.requestPasswordReset();
+                      },
+                      backgroundColor: AppColors.darkPrimary,
+                      textColor: Colors.white,
+                      textSize: 15.sp,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Roboto',
+                      borderRadius: 30.r,
+                      height: 55.h,
                     ),
-                  )
-                : CustomButton(
-                    text: "Submit",
-                    onPressed: () {
-                      // Print payload data when button is tapped
-                      if (kDebugMode) {
-                        print('\n============= FORGOT PASSWORD PAYLOAD ==============');
-                        print('Email: ${controller.emailController.text.trim()}');
-                        print('Payload: {');
-                        print('  "email": "${controller.emailController.text.trim()}"');
-                        print('}');
-                        print('================================================\n');
-                      }
-                      
-                      // Call forgot password method
-                      controller.requestPasswordReset();
-                    },
-                    backgroundColor: AppColors.primaryBlue,
-                    textColor: Colors.white,
-                    textSize: 15.sp,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Roboto',
-                    borderRadius: 30.r,
-                    height: 55.h,
-                  ),
             ),
 
             SizedBox(height: 15.h),
@@ -129,7 +140,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               child: Text(
                 "You will receive an OTP on your registered email for verification.",
                 style: TextStyle(
-                  color: AppColors.grey,
+                  color: Colors.grey,
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w400,
                 ),
@@ -146,7 +157,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 child: Text(
                   "Back to Login",
                   style: TextStyle(
-                    color: AppColors.primaryBlue,
+                    color: AppColors.darkPrimary,
                     fontWeight: FontWeight.w600,
                     fontSize: 14.sp,
                   ),

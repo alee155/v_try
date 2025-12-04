@@ -52,7 +52,7 @@ class _EditProfileState extends State<EditProfile> {
                       child: Container(
                         padding: EdgeInsets.all(5.w),
                         decoration: BoxDecoration(
-                          color: AppColors.primaryBlue,
+                          color: AppColors.darkPrimary,
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
@@ -110,7 +110,7 @@ class _EditProfileState extends State<EditProfile> {
                   print("Name: ${nameController.text}");
                   print("Phone: ${phoneController.text}");
                 },
-                backgroundColor: AppColors.primaryBlue,
+                backgroundColor: AppColors.darkPrimary,
                 textColor: Colors.white,
                 textSize: 15.sp,
                 fontWeight: FontWeight.bold,

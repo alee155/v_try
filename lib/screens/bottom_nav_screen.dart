@@ -231,7 +231,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
           SvgPicture.asset(
             assetName,
             colorFilter: ColorFilter.mode(
-              isActive ? AppColors.white : AppColors.primaryBlue,
+              isActive ? AppColors.darkWhite : AppColors.darkPrimary,
               BlendMode.srcIn,
             ),
             height: 28.h,
@@ -340,7 +340,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       case 2:
         return const FavoriteScreen();
       case 3:
-        return const EditProfile();
+        return const ProfileScreen();
       default:
         return const SizedBox.shrink();
     }

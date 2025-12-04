@@ -154,7 +154,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: 16),
                           child: CircularProgressIndicator(
-                            color: AppColors.primaryBlue,
+                            color: AppColors.darkPrimary,
                           ),
                         ),
                       );
@@ -274,7 +274,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     color: Colors.white.withOpacity(0.4),
                                     width: 2,
                                   ),
-                                  color: AppColors.primaryBlue.withOpacity(0.8),
+                                  color: AppColors.darkPrimary.withOpacity(0.8),
                                   boxShadow: [
                                     BoxShadow(
                                       color: Colors.black.withOpacity(0.2),
@@ -304,7 +304,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   color: Colors.white.withOpacity(0.4),
                                   width: 2,
                                 ),
-                                color: AppColors.primaryBlue.withOpacity(0.8),
+                                color: AppColors.darkPrimary.withOpacity(0.8),
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.black.withOpacity(0.2),
@@ -353,14 +353,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           height: 48.h,
                           width: 48.w,
                           decoration: BoxDecoration(
-                            color: AppColors.primaryBlue,
+                            color: AppColors.darkPrimary,
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Center(
                             child: SvgPicture.asset(
                               "assets/icons/filter.svg",
                               colorFilter: const ColorFilter.mode(
-                                AppColors.white,
+                                AppColors.darkWhite,
                                 BlendMode.srcIn,
                               ),
                               height: 23.h,

@@ -38,7 +38,7 @@ class SuccessScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 26.sp,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.primaryBlue,
+                  color: AppColors.darkPrimary,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -64,7 +64,7 @@ class SuccessScreen extends StatelessWidget {
                     curve: Curves.easeInOut,
                   );
                 },
-                backgroundColor: AppColors.primaryBlue,
+                backgroundColor: AppColors.darkPrimary,
 
                 textColor: Colors.white,
                 textSize: 15.sp,

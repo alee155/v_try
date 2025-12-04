@@ -100,7 +100,7 @@ class ClothingFilterBottomSheet {
                             style: TextStyle(
                               fontSize: 18.sp,
                               fontWeight: FontWeight.bold,
-                              color: AppColors.primaryBlue,
+                              color: AppColors.darkPrimary,
                             ),
                           ),
                           Row(
@@ -110,7 +110,7 @@ class ClothingFilterBottomSheet {
                                 child: Text(
                                   "Select All",
                                   style: TextStyle(
-                                    color: AppColors.primaryBlue,
+                                    color: AppColors.darkPrimary,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -155,12 +155,12 @@ class ClothingFilterBottomSheet {
                                 ),
                                 decoration: BoxDecoration(
                                   color: isSelected
-                                      ? AppColors.primaryBlue.withOpacity(0.2)
+                                      ? AppColors.darkPrimary.withOpacity(0.2)
                                       : Colors.white.withOpacity(0.1),
                                   borderRadius: BorderRadius.circular(16.r),
                                   border: Border.all(
                                     color: isSelected
-                                        ? AppColors.primaryBlue
+                                        ? AppColors.darkPrimary
                                         : Colors.white.withOpacity(0.2),
                                   ),
                                 ),
@@ -173,7 +173,7 @@ class ClothingFilterBottomSheet {
                                       width: 20.w,
                                       colorFilter: ColorFilter.mode(
                                         isSelected
-                                            ? AppColors.primaryBlue
+                                            ? AppColors.darkPrimary
                                             : Colors.grey,
                                         BlendMode.srcIn,
                                       ),
@@ -185,7 +185,7 @@ class ClothingFilterBottomSheet {
                                         fontSize: 14.sp,
                                         fontWeight: FontWeight.w500,
                                         color: isSelected
-                                            ? AppColors.primaryBlue
+                                            ? AppColors.darkPrimary
                                             : Colors.black87,
                                       ),
                                     ),
@@ -205,7 +205,7 @@ class ClothingFilterBottomSheet {
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.bold,
-                          color: AppColors.primaryBlue,
+                          color: AppColors.darkPrimary,
                         ),
                       ),
                       SizedBox(height: 10.h),
@@ -227,12 +227,12 @@ class ClothingFilterBottomSheet {
                               ),
                               decoration: BoxDecoration(
                                 color: isSelected
-                                    ? AppColors.primaryBlue.withOpacity(0.2)
+                                    ? AppColors.darkPrimary.withOpacity(0.2)
                                     : Colors.white.withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(16.r),
                                 border: Border.all(
                                   color: isSelected
-                                      ? AppColors.primaryBlue
+                                      ? AppColors.darkPrimary
                                       : Colors.white.withOpacity(0.2),
                                 ),
                               ),
@@ -242,7 +242,7 @@ class ClothingFilterBottomSheet {
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w500,
                                   color: isSelected
-                                      ? AppColors.primaryBlue
+                                      ? AppColors.darkPrimary
                                       : Colors.black87,
                                 ),
                               ),
@@ -259,7 +259,7 @@ class ClothingFilterBottomSheet {
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.bold,
-                          color: AppColors.primaryBlue,
+                          color: AppColors.darkPrimary,
                         ),
                       ),
                       RangeSlider(
@@ -271,7 +271,7 @@ class ClothingFilterBottomSheet {
                           "\$${priceRange.start.toInt()}",
                           "\$${priceRange.end.toInt()}",
                         ),
-                        activeColor: AppColors.primaryBlue,
+                        activeColor: AppColors.darkPrimary,
                         inactiveColor: Colors.grey[300],
                         onChanged: (RangeValues values) {
                           setState(() {
@@ -302,7 +302,7 @@ class ClothingFilterBottomSheet {
                           Navigator.pop(context);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primaryBlue,
+                          backgroundColor: AppColors.darkPrimary,
                           minimumSize: Size(double.infinity, 50.h),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.r),

@@ -30,14 +30,14 @@ class _LoginFormState extends State<LoginForm> {
             "Login to Your Account",
             style: TextStyle(
               fontSize: 20.sp,
-              color: AppColors.black,
+              color: AppColors.darkBlack,
               fontWeight: FontWeight.bold,
             ),
           ),
           SizedBox(height: 10.h),
           Text(
             "Make sure that you already have an account.",
-            style: TextStyle(fontSize: 14.sp, color: AppColors.grey),
+            style: TextStyle(fontSize: 14.sp, color: Colors.grey),
           ),
           SizedBox(height: 40.h),
 
@@ -46,7 +46,7 @@ class _LoginFormState extends State<LoginForm> {
             "Email Address",
             style: TextStyle(
               fontSize: 15.sp,
-              color: AppColors.black,
+              color: AppColors.darkBlack,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -62,7 +62,7 @@ class _LoginFormState extends State<LoginForm> {
             "Password",
             style: TextStyle(
               fontSize: 15.sp,
-              color: AppColors.black,
+              color: AppColors.darkBlack,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -86,12 +86,15 @@ class _LoginFormState extends State<LoginForm> {
                   children: [
                     Checkbox(
                       value: controller.stayLoggedInLogin.value,
-                      activeColor: AppColors.primaryBlue,
+                      activeColor: AppColors.darkPrimary,
                       onChanged: (_) => controller.toggleStayLoggedInLogin(),
                     ),
                     Text(
                       "Remember me",
-                      style: TextStyle(fontSize: 14.sp, color: AppColors.black),
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: AppColors.darkBlack,
+                      ),
                     ),
                   ],
                 ),
@@ -110,7 +113,7 @@ class _LoginFormState extends State<LoginForm> {
                   "Forgot Password?",
                   style: TextStyle(
                     fontSize: 14.sp,
-                    color: AppColors.primaryBlue,
+                    color: AppColors.darkPrimary,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -124,7 +127,7 @@ class _LoginFormState extends State<LoginForm> {
             () => controller.isLoading.value
                 ? Center(
                     child: CircularProgressIndicator(
-                      color: AppColors.primaryBlue,
+                      color: AppColors.darkPrimary,
                     ),
                   )
                 : CustomButton(
@@ -155,7 +158,7 @@ class _LoginFormState extends State<LoginForm> {
                       // Call signin method
                       controller.signin();
                     },
-                    backgroundColor: AppColors.primaryBlue,
+                    backgroundColor: AppColors.darkPrimary,
                     textColor: Colors.white,
                     textSize: 15.sp,
                     fontWeight: FontWeight.bold,

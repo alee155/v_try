@@ -87,7 +87,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     final iconSize = 18.sp;
 
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.darkWhite,
       body: NestedScrollView(
         // attach controller to the inner scrollable content
         controller: _scrollController,
@@ -144,7 +144,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         Container(
                           height: topImageHeight,
                           decoration: BoxDecoration(
-                            color: AppColors.primaryBlue,
+                            color: AppColors.darkPrimary,
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(20.r),
                               bottomRight: Radius.circular(20.r),
@@ -254,7 +254,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 style: TextStyle(
                   fontSize: 18.sp,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.primaryBlue,
+                  color: AppColors.darkPrimary,
                 ),
               ),
               SizedBox(height: 16.h),
@@ -340,12 +340,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ),
                         decoration: BoxDecoration(
                           color: selected
-                              ? AppColors.primaryBlue
+                              ? AppColors.darkPrimary
                               : Colors.white,
                           borderRadius: BorderRadius.circular(8.r),
                           border: Border.all(
                             color: selected
-                                ? AppColors.primaryBlue
+                                ? AppColors.darkPrimary
                                 : Colors.grey.shade300,
                           ),
                         ),

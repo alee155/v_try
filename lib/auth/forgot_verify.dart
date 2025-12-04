@@ -9,11 +9,11 @@ import 'package:vtry/widgets/custom_button.dart';
 
 class ForgotVerifyScreen extends StatelessWidget {
   final String email;
-  
+
   ForgotVerifyScreen({super.key, required this.email});
-  
+
   late final ForgotOtpController controller;
-  
+
   @override
   Widget build(BuildContext context) {
     // Initialize controller with the email parameter
@@ -65,7 +65,7 @@ class ForgotVerifyScreen extends StatelessWidget {
                       text: email,
                       style: TextStyle(
                         fontSize: 14.sp,
-                        color: AppColors.primaryBlue,
+                        color: AppColors.darkPrimary,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -75,12 +75,12 @@ class ForgotVerifyScreen extends StatelessWidget {
               20.h.verticalSpace,
               OtpTextField(
                 numberOfFields: 4,
-                borderColor: AppColors.primaryBlue,
+                borderColor: AppColors.darkPrimary,
                 showFieldAsBox: true,
                 borderRadius: BorderRadius.circular(12),
                 fieldWidth: 60.w,
                 keyboardType: TextInputType.number,
-                focusedBorderColor: AppColors.primaryBlue,
+                focusedBorderColor: AppColors.darkPrimary,
                 onCodeChanged: (String code) {
                   // Update OTP as user types
                   controller.setOtp(code);
@@ -89,20 +89,24 @@ class ForgotVerifyScreen extends StatelessWidget {
                   controller.setOtp(verificationCode);
                   // Print payload data when OTP is entered
                   if (kDebugMode) {
-                    print('\n============= VERIFY FORGOT OTP PAYLOAD ==============');
+                    print(
+                      '\n============= VERIFY FORGOT OTP PAYLOAD ==============',
+                    );
                     print('Email: $email');
                     print('OTP: $verificationCode');
                     print('Payload: {');
                     print('  "email": "$email",');
                     print('  "otp": "$verificationCode"');
                     print('}');
-                    print('==================================================\n');
+                    print(
+                      '==================================================\n',
+                    );
                   }
                 },
               ),
-              
+
               20.h.verticalSpace,
-              
+
               // Timer
               Obx(
                 () => Text(
@@ -119,7 +123,7 @@ class ForgotVerifyScreen extends StatelessWidget {
                 ),
               ),
               10.h.verticalSpace,
-              
+
               // Resend button
               Obx(
                 () => GestureDetector(
@@ -130,7 +134,7 @@ class ForgotVerifyScreen extends StatelessWidget {
                     "Resend OTP",
                     style: TextStyle(
                       fontSize: 16.sp,
-                      color: AppColors.primaryBlue,
+                      color: AppColors.darkPrimary,
                       fontWeight: FontWeight.w600,
                       decoration: controller.isResendEnabled.value
                           ? TextDecoration.underline
@@ -148,19 +152,24 @@ class ForgotVerifyScreen extends StatelessWidget {
       // Button at bottom
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 20.h),
-        child: Obx(() => controller.isLoading.value
-          ? Center(child: CircularProgressIndicator(color: AppColors.primaryBlue))
-          : CustomButton(
-              text: "Verify OTP",
-              onPressed: () => controller.verifyOtp(),
-              backgroundColor: AppColors.primaryBlue,
-              textColor: Colors.white,
-              textSize: 15.sp,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Roboto',
-              borderRadius: 30.r,
-              height: 55.h,
-            ),
+        child: Obx(
+          () => controller.isLoading.value
+              ? Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.darkPrimary,
+                  ),
+                )
+              : CustomButton(
+                  text: "Verify OTP",
+                  onPressed: () => controller.verifyOtp(),
+                  backgroundColor: AppColors.darkPrimary,
+                  textColor: Colors.white,
+                  textSize: 15.sp,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Roboto',
+                  borderRadius: 30.r,
+                  height: 55.h,
+                ),
         ),
       ),
     );

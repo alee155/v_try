@@ -28,21 +28,21 @@ class _SignupFormState extends State<SignupForm> {
             "Sign Up to Your Account",
             style: TextStyle(
               fontSize: 20.sp,
-              color: AppColors.black,
+              color: AppColors.darkBlack,
               fontWeight: FontWeight.bold,
             ),
           ),
 
           Text(
             "Make sure your account keep secure",
-            style: TextStyle(fontSize: 14.sp, color: AppColors.grey),
+            style: TextStyle(fontSize: 14.sp, color: Colors.grey),
           ),
           SizedBox(height: 10.h),
           Text(
             "Name",
             style: TextStyle(
               fontSize: 15.sp,
-              color: AppColors.black,
+              color: AppColors.darkBlack,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -57,7 +57,7 @@ class _SignupFormState extends State<SignupForm> {
             "User Name",
             style: TextStyle(
               fontSize: 15.sp,
-              color: AppColors.black,
+              color: AppColors.darkBlack,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -71,7 +71,7 @@ class _SignupFormState extends State<SignupForm> {
             "Email Address",
             style: TextStyle(
               fontSize: 15.sp,
-              color: AppColors.black,
+              color: AppColors.darkBlack,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -85,7 +85,7 @@ class _SignupFormState extends State<SignupForm> {
             "Phone Number",
             style: TextStyle(
               fontSize: 15.sp,
-              color: AppColors.black,
+              color: AppColors.darkBlack,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -99,7 +99,7 @@ class _SignupFormState extends State<SignupForm> {
             "Password",
             style: TextStyle(
               fontSize: 15.sp,
-              color: AppColors.black,
+              color: AppColors.darkBlack,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -118,12 +118,12 @@ class _SignupFormState extends State<SignupForm> {
               children: [
                 Checkbox(
                   value: controller.agreeToTerms.value,
-                  activeColor: AppColors.primaryBlue,
+                  activeColor: AppColors.darkPrimary,
                   onChanged: (_) => controller.toggleTermsAgreement(),
                 ),
                 Text(
                   "I agree with the terms and conditions by creating an\naccount",
-                  style: TextStyle(fontSize: 10.sp, color: AppColors.grey),
+                  style: TextStyle(fontSize: 10.sp, color: Colors.grey),
                 ),
               ],
             ),
@@ -134,7 +134,7 @@ class _SignupFormState extends State<SignupForm> {
             () => controller.isLoading.value
                 ? Center(
                     child: CircularProgressIndicator(
-                      color: AppColors.primaryBlue,
+                      color: AppColors.darkPrimary,
                     ),
                   )
                 : CustomButton(
@@ -183,7 +183,7 @@ class _SignupFormState extends State<SignupForm> {
                       // Call the signup method
                       controller.signup();
                     },
-                    backgroundColor: AppColors.primaryBlue,
+                    backgroundColor: AppColors.darkPrimary,
                     textColor: Colors.white,
                     textSize: 15.sp,
                     fontWeight: FontWeight.bold,

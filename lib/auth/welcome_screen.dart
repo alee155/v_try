@@ -33,7 +33,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       body: Stack(
         children: [
           // Background
-          Container(color: AppColors.primaryBlue),
+          Container(color: AppColors.darkPrimary),
 
           // Top container
           Positioned(
@@ -44,7 +44,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               height: 183.h,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: AppColors.softBlue,
+                color: AppColors.darkPrimary,
                 borderRadius: BorderRadius.all(Radius.circular(24.r)),
               ),
               child: Column(
@@ -52,7 +52,10 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 children: [
                   Text(
                     'Hello, There',
-                    style: TextStyle(fontSize: 15.sp, color: AppColors.white),
+                    style: TextStyle(
+                      fontSize: 15.sp,
+                      color: AppColors.darkWhite,
+                    ),
                   ),
                   SizedBox(height: 5.h),
                   Text(
@@ -60,7 +63,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.black,
+                      color: AppColors.darkBlack,
                     ),
                   ),
                   SizedBox(height: 15.h),
@@ -71,7 +74,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       height: 50.h,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: AppColors.primaryBlue,
+                        color: AppColors.darkPrimary,
                         borderRadius: BorderRadius.all(Radius.circular(24.r)),
                       ),
                       child: Padding(
@@ -82,12 +85,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         child: TabBar(
                           controller: _tabController,
                           indicator: BoxDecoration(
-                            color: AppColors.white,
+                            color: AppColors.darkWhite,
                             borderRadius: BorderRadius.circular(24.r),
                           ),
                           dividerColor: Colors.transparent,
                           indicatorSize: TabBarIndicatorSize.tab,
-                          labelColor: AppColors.primaryBlue,
+                          labelColor: AppColors.darkPrimary,
                           unselectedLabelColor: Colors.white,
                           labelStyle: TextStyle(
                             fontSize: 14.sp,
@@ -116,7 +119,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               height: 520.h,
               width: double.infinity,
               decoration: const BoxDecoration(
-                color: AppColors.white,
+                color: AppColors.darkWhite,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30),
                   topRight: Radius.circular(30),

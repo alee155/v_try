@@ -36,7 +36,7 @@ class OtpScreen extends StatelessWidget {
                 child: const Icon(
                   Icons.lock_outline,
                   size: 60,
-                  color: AppColors.primaryBlue,
+                  color: AppColors.darkPrimary,
                 ),
               ),
               40.h.verticalSpace,
@@ -69,7 +69,7 @@ class OtpScreen extends StatelessWidget {
                       text: email,
                       style: TextStyle(
                         fontSize: 14.sp,
-                        color: AppColors.primaryBlue,
+                        color: AppColors.darkPrimary,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -79,12 +79,12 @@ class OtpScreen extends StatelessWidget {
               20.h.verticalSpace,
               OtpTextField(
                 numberOfFields: 4,
-                borderColor: AppColors.primaryBlue,
+                borderColor: AppColors.darkPrimary,
                 showFieldAsBox: true,
                 borderRadius: BorderRadius.circular(12),
                 fieldWidth: 60.w,
                 keyboardType: TextInputType.number,
-                focusedBorderColor: AppColors.primaryBlue,
+                focusedBorderColor: AppColors.darkPrimary,
                 clearText: otpController.isLoading.value,
                 onCodeChanged: (String code) {
                   // Update OTP as user types
@@ -151,7 +151,7 @@ class OtpScreen extends StatelessWidget {
                     "Resend OTP",
                     style: TextStyle(
                       fontSize: 16.sp,
-                      color: AppColors.primaryBlue,
+                      color: AppColors.darkPrimary,
                       fontWeight: FontWeight.w600,
                       decoration: otpController.isResendEnabled.value
                           ? TextDecoration.underline
@@ -172,7 +172,7 @@ class OtpScreen extends StatelessWidget {
           () => otpController.isLoading.value
               ? Center(
                   child: CircularProgressIndicator(
-                    color: AppColors.primaryBlue,
+                    color: AppColors.darkPrimary,
                   ),
                 )
               : CustomButton(
@@ -196,7 +196,7 @@ class OtpScreen extends StatelessWidget {
                     // Proceed with verification
                     otpController.verifyOtp(email);
                   },
-                  backgroundColor: AppColors.primaryBlue,
+                  backgroundColor: AppColors.darkPrimary,
                   textColor: Colors.white,
                   textSize: 15.sp,
                   fontWeight: FontWeight.bold,

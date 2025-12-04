@@ -24,10 +24,10 @@ class CategoryContainer extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
-          color: selected ? AppColors.primaryBlue : Colors.white,
+          color: selected ? AppColors.darkPrimary : Colors.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: selected ? AppColors.primaryBlue : Colors.grey.shade300,
+            color: selected ? AppColors.darkPrimary : Colors.grey.shade300,
             width: 1.5,
           ),
         ),
