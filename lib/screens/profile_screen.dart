@@ -8,6 +8,7 @@ import 'package:vtry/controllers/profile_controller.dart';
 import 'package:vtry/screens/settings_screen.dart';
 import 'package:vtry/utils/app_colors.dart';
 import 'package:vtry/widgets/custom_button.dart';
+import 'package:vtry/widgets/settings_widgets.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -19,6 +20,8 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   final LoginController _loginController = Get.find<LoginController>();
   ProfileController? _profileController;
+  bool isNotificationOn = true;
+  bool isDarkTheme = false;
 
   @override
   void initState() {
@@ -39,32 +42,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   // Helper method to build profile info items
-  Widget _buildProfileItem(String label, String value) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.h),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 16.sp,
-              color: AppColors.black,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 16.sp,
-              color: AppColors.primaryBlue,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   void _logout() async {
     try {
@@ -245,33 +222,106 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     //       })
                     //     : const SizedBox(),
                     // SizedBox(height: 10.h),
-                    CustomButton(
-                      text: "Logout",
-                      onPressed: () {
-                        _logout();
-                      },
-                      backgroundColor: AppColors.primaryBlue,
-                      textColor: Colors.white,
-                      textSize: 15.sp,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Roboto',
-                      borderRadius: 30.r,
-                      height: 55.h,
-                    ),
-                    Expanded(
-                      child: GridView.count(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 15.w,
-                        mainAxisSpacing: 15.h,
-                        childAspectRatio: 1.2,
-                        physics: const NeverScrollableScrollPhysics(),
-                        children: [
-                          _gridItem(Icons.favorite, "05", Colors.pink),
-                          _gridItem(Icons.person, "Prime ", Colors.deepPurple),
-                          _gridItem(Icons.image, "19", Colors.teal),
-                          _gridItem(Icons.star, "4.5", Colors.amber),
-                        ],
-                      ),
+                    Column(
+                      children: [
+                        TileContainer(
+                          child: SettingsTile(
+                            title: "Edit Profile",
+                            iconPath: "assets/icons/user_icon.svg",
+                          ),
+                        ),
+                        TileContainer(
+                          child: SettingsTile(
+                            title: "Edit Password",
+                            iconPath: "assets/icons/password_icon.svg",
+                          ),
+                        ),
+
+                        // Notification Switch
+                        TileContainer(
+                          child: SwitchListTile(
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 15.w,
+                            ),
+                            title: Text(
+                              "Notifications",
+                              style: TextStyle(
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            secondary: Container(
+                              padding: EdgeInsets.all(8.w),
+                              decoration: BoxDecoration(
+                                color: AppColors.primaryBlue.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(12.r),
+                              ),
+                              child: Icon(
+                                Icons.notifications,
+                                color: AppColors.primaryBlue,
+                              ),
+                            ),
+                            value: isNotificationOn,
+                            onChanged: (value) =>
+                                setState(() => isNotificationOn = value),
+                          ),
+                        ),
+
+                        // Theme Switch
+                        TileContainer(
+                          child: SwitchListTile(
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 15.w,
+                            ),
+                            title: Text(
+                              "Dark Mode",
+                              style: TextStyle(
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            secondary: Container(
+                              padding: EdgeInsets.all(8.w),
+                              decoration: BoxDecoration(
+                                color: AppColors.primaryBlue.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(12.r),
+                              ),
+                              child: Icon(
+                                Icons.dark_mode,
+                                color: AppColors.primaryBlue,
+                              ),
+                            ),
+                            value: isDarkTheme,
+                            onChanged: (value) =>
+                                setState(() => isDarkTheme = value),
+                          ),
+                        ),
+
+                        TileContainer(
+                          child: SettingsTile(
+                            title: "Subscription",
+                            iconPath: "assets/icons/payment.svg",
+                          ),
+                        ),
+
+                        TileContainer(
+                          child: SettingsTile(
+                            title: "Delete Account",
+                            iconPath: "assets/icons/delete_icon.svg",
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            _logout();
+                          },
+                          child: TileContainer(
+                            child: SettingsTile(
+                              title: "Logout",
+                              iconPath: "assets/icons/logout_icon.svg",
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -353,33 +403,4 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
-}
-
-Widget _gridItem(IconData icon, String title, Color color) {
-  return Container(
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(16.r),
-      border: Border.all(color: color.withOpacity(0.3)),
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        CircleAvatar(
-          radius: 25,
-          backgroundColor: color.withOpacity(0.2),
-          child: Icon(icon, size: 28, color: color),
-        ),
-        SizedBox(height: 10.h),
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 15.sp,
-            fontWeight: FontWeight.w600,
-            color: Colors.black,
-          ),
-        ),
-      ],
-    ),
-  );
 }

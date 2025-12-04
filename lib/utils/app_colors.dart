@@ -12,4 +12,6 @@ class AppColors {
   static const Color primaryBlue = Color(0xFF25388D);
   static const Color softBlue = Color(0xFF8898E3);
   static const Color softGrey = Color(0xFFDFDEDE);
+
+  static const Color scafoldcolor = Color(0xFF000000);
 }

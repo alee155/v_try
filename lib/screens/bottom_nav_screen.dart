@@ -8,6 +8,8 @@ import 'package:vtry/controllers/login_controller.dart';
 import 'package:vtry/controllers/profile_controller.dart';
 import 'package:vtry/models/category_model.dart' as category_model;
 import 'package:vtry/models/product_model.dart';
+import 'package:vtry/screens/edit_profile_screen.dart';
+import 'package:vtry/screens/forgot_password_screen.dart';
 import 'package:vtry/services/api_service.dart';
 
 import 'package:vtry/screens/dashboard_screen.dart';
@@ -334,11 +336,11 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
           },
         );
       case 1:
-        return ProductDetailsScreen();
+        return ForgotPasswordScreen();
       case 2:
         return const FavoriteScreen();
       case 3:
-        return const ProfileScreen();
+        return const EditProfile();
       default:
         return const SizedBox.shrink();
     }

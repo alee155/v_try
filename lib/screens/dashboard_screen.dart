@@ -180,7 +180,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ProductDetailsScreen(),
+                            builder: (context) =>
+                                ProductDetailsScreen(product: product),
                           ),
                         );
                       },
